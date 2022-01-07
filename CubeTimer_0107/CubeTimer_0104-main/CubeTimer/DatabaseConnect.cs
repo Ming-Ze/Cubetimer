@@ -68,6 +68,13 @@ namespace CubeTimer
                 cmd.Parameters.Add("@Name",SqlDbType.NVarChar).Value = us.getUser();
 
                 SqlDataReader sdr = cmd.ExecuteReader();
+                if (!sdr.HasRows)
+                {
+                    sdr.Close();
+                    scn.Close();
+                    scn.Dispose();
+                    return false;
+                }
 
                 // Insert data to user statement
                 while (sdr.Read())
